@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Providers;
+use Dotenv\Dotenv;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -19,6 +20,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // load admin env file //
+        if (file_exists(base_path('.env_admin'))) {
+            $dotenv = Dotenv::createMutable(base_path(), '.env_admin');
+            $dotenv->load();
+        }
     }
 }
